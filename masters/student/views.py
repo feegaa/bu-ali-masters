@@ -80,7 +80,7 @@ def dissertationReport(request):
         if form.is_valid():
             instance         = form.save(commit=False)
             instance.student = request.user
-            instance.jury_date = jdatetime.date(int(jdate[0]), int(jdate[1]), int(jdate[2]))
+            # instance.jury_date = jdatetime.date(int(jdate[0]), int(jdate[1]), int(jdate[2]))
             instance.save()
             return redirect('student:dashboard', username=request.user.username)
             # jalali_join = date2jalali(the_date).strftime('%y/%m/%d')

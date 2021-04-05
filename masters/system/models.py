@@ -58,13 +58,11 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['n_code']
 
     def save(self, *args, **kwargs):
-        if self.item_type == User.Types.STAFF:
-            self.is_staff = True
         if not self.password:
             self.set_password(self.n_code)
         else:
             self.set_password(self.password)
-
+            
         return super().save(*args, **kwargs)
 
 
