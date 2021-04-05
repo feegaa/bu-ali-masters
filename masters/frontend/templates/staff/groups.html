@@ -1,0 +1,14 @@
+{% extends './template.html' %}
+
+
+{% block main %}
+    <h1>Groups</h1>
+    
+    {% for group in groups %}
+        <ul>
+            <li>{{ group.title }}</li>
+        </ul>
+    {% endfor %}
+        
+{% endblock main %}
+    

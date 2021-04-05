@@ -1,0 +1,15 @@
+.logout-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 3px;
+  color: aliceblue;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.logout-item:hover {
+  background-color: #303753;
+  cursor: pointer;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="persian-datepicker.css"/>
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="grid">
+
+			<header class="header">
+				<i id="menu_toggle" class="fas fa-bars header__menu"></i>
+			</header>
+
+			<aside class="sidenav">
+				<div class="sidenav__brand">
+					<a href="#">سامانه تحصیلات تکمیلی</a>
+					<i class="fas fa-times sidenav__brand-close"></i>
+				</div>
+				<div class="sidenav__profile">
+					<div class="sidenav__profile-avatar"></div>
+					<div class="sidenav__profile-title text-light">اوپراتور ۱۲۳</div>
+				</div>
+				<div class="row row--align-v-center row--align-h-center">
+					<ul>
+						
+						{% block sidebar %}{% endblock sidebar %}
+							
+						<li class="exit_item" >خروج<i class="fa fa-sign-out"></i></li>
+					</ul>
+
+				</div>
+			</aside>
+
+			<main class="main">
+				{% block main %}{% endblock main %}
+			</main>
+
+		</div> 
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="persian-date.js"></script>
+		<script src="persian-datepicker.js"></script>
+		<script language="JavaScript" type="text/javascript" src="script.js"></script>
+	</body>
+</html>

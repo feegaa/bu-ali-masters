@@ -1,0 +1,24 @@
+{% extends './template.html' %}
+
+
+{% block content %}
+    <div class="main">
+        <form method="post">
+            <label for="title">عنوان گزارش</label>
+            <input type="text" name="title">
+            {{ form.title.errors }}
+            <label for="summary">چکیده مقاله</label>
+            <textarea name="summary" maxlength="500">
+            {{ form.summary.errors }}
+            <label for="problems">مسائل پروژه</label>
+            <input type="text" name="problems">
+            {{ form.summary.errors }}
+            <label for="proceedings">پیشرفت های پروژه</label>
+            <input type="text" name="proceedings">
+            {{ form.summary.errors }}
+
+            <button type="submit">ارسال گزارش</button>
+        </form>
+    </div>
+{% endblock content %}
+    
