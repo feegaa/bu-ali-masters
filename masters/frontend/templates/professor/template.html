@@ -24,16 +24,14 @@
 					<i class="fas fa-times sidenav__brand-close"></i>
 				</div>
 				<div class="sidenav__profile">
-					<div class="sidenav__profile-title text-light">دکتر {{ request.user.username }}</div>
+					<div class="sidenav__profile-title text-light">دکتر {{ request.user.first_name }} {{ request.user.first_name }}</div>
 				</div>
 				<div class="row row--align-v-center row--align-h-center">
                             <div class="row row--align-v-center row--align-h-center">
                               <ul class="navList">
-                                <li class="navList__heading">درخواست<i class="far fa-file-alt"></i></li>
+                                <li class="navList__heading">ثبت درخواست<i class="far fa-file-alt"></i></li>
                                 <li>
-                                  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'professor:request_phd' %}"> اخذ دانشجو دکترا</a></span>
-                                  </div>
+
                                   <div class="item-title">
                                     <span class="navList__subheading-title"><a href="{% url 'professor:request_master' %}">اخذ دانشجو ارشد</a></span>
                                   </div>
@@ -41,21 +39,7 @@
 
                   
                               <li class="navList__heading">ثبت<i class="far fa-file-alt"></i></li>
-                                <li>
-                                  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_group' %}">گروه</a></span>
-                                  </div>
-                                  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_professor' %}">استاد</a></span>
-                                  </div>
-								  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_orientation' %}">گرایش</a></span>
-                                  </div>
-								  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_student' %}">دانشجو</a></span>
-                                  </div>
-                              </li>
-                              
+
                               <hr>
                   
                               <li class="logout-item">                                  
@@ -93,5 +77,6 @@
 		<script src="{% static 'js/persian-datepicker.js' %}"></script>
 		<script src="{% static 'js/persian-date.js' %}"></script>
 		<script src="{% static 'js/script.js' %}"></script>
+		<script src="{% static 'js/more.js' %}"></script>
 	</body>
 </html>

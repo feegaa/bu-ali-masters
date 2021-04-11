@@ -33,7 +33,7 @@ class ProfessorFields(models.Model):
     is_adminstrator = models.BooleanField(default=False)
     grade           = models.CharField(max_length=10, choices=Grades.choices)
     last_university = models.CharField(max_length=100)
-
+    objects         = models.Manager()
     # RELATIONS
     group           = models.ForeignKey(Group, on_delete=models.DO_NOTHING)
 

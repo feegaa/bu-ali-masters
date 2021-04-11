@@ -8,11 +8,12 @@ class College(models.Model):
 
 
 class Group(models.Model):
-    title   = models.CharField(max_length=100, unique=True)
-    objects = models.Manager() 
+    title     = models.CharField(max_length=100, unique=True)
+    has_admin = models.BooleanField(default=False)
+    objects   = models.Manager() 
     
     # RELATIONS
-    college = models.ForeignKey(College, on_delete=models.CASCADE)
+    college   = models.ForeignKey(College, on_delete=models.CASCADE)
 
     @property
     def adminstrator(self):
@@ -45,7 +46,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=30, blank=False)
     last_name  = models.CharField(max_length=30, blank=False)
     password   = models.CharField(max_length=100, blank=False)
-    email      = models.EmailField(unique=True)
+    email      = models.EmailField(unique=False)
     username   = models.CharField(unique=True, max_length=10)
     n_code     = models.CharField(unique=True, max_length=10)
     phone      = PhoneNumberField(blank=False)

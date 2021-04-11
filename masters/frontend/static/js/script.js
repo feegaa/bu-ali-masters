@@ -8,8 +8,15 @@ $(document).ready(() => {
     setMenuClickListener();
     setSidenavCloseListener();
     readURL();
+    setTimeout();    
   });
   
+
+  setTimeout(function() {
+    $('#alert').fadeOut('fast');  
+  }, 2000); 
+
+
   // Set constants and grab needed elements
   const sidenavEl = $('.sidenav');
   const gridEl = $('.grid');

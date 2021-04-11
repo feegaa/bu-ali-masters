@@ -74,6 +74,14 @@ class GroupForm(forms.ModelForm):
         model  = Group
         fields = ["title"]
 
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if not title:
+            raise forms.ValidationError('عنوان گروه نمی‌تواند خالی باشد')
+        if title.isdigit():
+            raise forms.ValidationError('عنوان گروه شامل عدد نمی‌شود!')
+        return title
+
 #     # def clean_title(self):
 #     #     title = self.cleaned_data['title']
 #     #     if len(title) < 10:

@@ -1,6 +1,6 @@
 from django import forms
 from phonenumber_field.formfields import PhoneNumberField
-from professor.models import Professor, ProfessorFields
+from professor.models import Professor, ProfessorFields, MasterRequest
 
 
 class ProfessorForm(forms.ModelForm):
@@ -9,6 +9,20 @@ class ProfessorForm(forms.ModelForm):
     class Meta:
         model  = Professor
         fields = ['first_name', 'last_name', 'username', 'n_code', 'email', 'phone', 'gender']
+
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        if first_name.isdigit():
+            raise forms.ValidationError('نوع ورودی نامعتبر')
+        return first_name
+
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+        if last_name.isdigit():
+            raise forms.ValidationError('نوع ورودی نامعتبر')
+        return last_name
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -32,7 +46,28 @@ class PFForm(forms.ModelForm):
         model  = ProfessorFields
         fields = ['grade', 'last_university']
 
+class MRForm(forms.ModelForm):
+    class Meta:
+        model  = MasterRequest
+        fields = ['type_1', 'type_2']
 
+    def clean_type_1(self):
+        type_1 = self.cleaned_data.get('type_1')
+        # if not type_1.isdigit():
+        #     raise forms.ValidationError('لطفا عدد وارد کنید')
+        if type_1 > 15:
+            raise forms.ValidationError('بیشتر از حد مجاز')
+        return type_1
+
+
+
+    def clean_type_2(self):
+        type_2 = self.cleaned_data.get('type_2')
+        # if not type_2.isdigit():
+        #     raise forms.ValidationError('لطفا عدد وارد کنید')
+        if type_2 > 15:
+            raise forms.ValidationError('بیشتر از حد مجاز')
+        return type_2
 
 # class StudentForm(forms.ModelForm):
 

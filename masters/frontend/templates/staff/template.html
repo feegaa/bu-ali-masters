@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,49 +24,98 @@
 					<p>سامانه تحصیلات تکمیلی</p>
 				</div>
 				<div class="sidenav__profile">
+          <img class="avatar" width="64" height="64" src="{% static 'imgs/default.png' %}" alt="avatar">
+          <!-- <div class="sidenav__profile-avatar"></div> -->
 					<div class="sidenav__profile-title text-light">کارمند {{ request.user.username }}</div>
 				</div>
 				<div class="row row--align-v-center row--align-h-center">
-                            <div class="row row--align-v-center row--align-h-center">
-                              <ul class="navList">
-                                <li class="navList__heading">درخواست ها<i class="far fa-paper-plane"></i></li>
-                                <li>
-                                  <div class="item-title">
-                                    <span class="navList__subheading-title">اخذ دانشجو دکترا</span>
-                                  </div>
-                                  <div class="item-title">
-                                    <span class="navList__subheading-title">اخذ دانشجو ارشد</span>
-                                  </div>
-                              </li>
+          <div class="row row--align-v-center row--align-h-center">
+            <ul class="navList">
+              <li class="navList__heading">درخواست ها<i class="far fa-paper-plane"></i></li>
+              <li>
+                <div class="item-title">
+                  <span class="navList__subheading-title">اخذ دانشجو ارشد</span>
+                </div>
+            </li>
 
                   
-                              <li class="navList__heading">ثبت<i class="far fa-plus"></i></li>
-                                <li>
-                                  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_group' %}">گروه</a></span>
-                                  </div>
-                                  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_professor' %}">استاد</a></span>
-                                  </div>
-								  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_orientation' %}">گرایش</a></span>
-                                  </div>
-								  <div class="item-title">
-                                    <span class="navList__subheading-title"><a href="{% url 'staff:add_student' %}">دانشجو</a></span>
-                                  </div>
-                              </li>
-                              
-      
-                              <hr>
-                  
-                              <li class="logout-item">                                  
-                                <a href="{% url 'system:logout' %}">خروج</a>
-								<i class="fa fa-sign-out"></i>
-                              </li>
+                        <li class="navList__heading">ثبت<i class="far fa-plus"></i></li>
+                          <li>
+                            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_group' %}">گروه</a></span>
+                            </div>
+                            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_professor' %}">استاد</a></span>
+                            </div>
+            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_orientation' %}">گرایش</a></span>
+                            </div>
+            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_student' %}">دانشجو</a></span>
+                            </div>
+                        </li>
 
-                  
-                          </ul>
+                        <li>
+
+                          <div class="dropdown">
+                            <span class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Dropdown button
+                            </span>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
                           </div>
+                        </li>
+
+                          <li> 
+
+                          <div class="dropdown-toggle navList__subheading" style="direction: rtl;" id="dropdownMenuButton" data-toggle="dropdown">
+                            سلام
+                            <span  class="navList__subheading-title"></span>
+                          </div>
+                          <ul class="subList subList--hidden">
+                            <li class="subList__item">mortgage</li>
+                            <li class="subList__item">investments</li>
+                            <li class="subList__item">spend log</li>
+                            <li class="subList__item">owed</li>
+                          </ul>
+                        </li> 
+
+                        <li class="navList__heading">لیست<i class="far fa-list"></i></li>
+                          <li>
+                            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_group' %}">گروه</a></span>
+                            </div>
+                            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_professor' %}">استاد</a></span>
+                            </div>
+            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_orientation' %}">گرایش</a></span>
+                            </div>
+            <div class="item-title">
+                              <span class="navList__subheading-title"><a href="{% url 'staff:add_student' %}">دانشجو</a></span>
+                            </div>
+                        </li>
+                        
+
+                        <hr>
+            
+
+                        <li class="logout-item">                                  
+                          <a href="{% url 'staff:dashboard' username=request.user.username %}">داشبورد</a>
+          <i class="fa fa-tachometer"></i>
+                        </li>
+
+                        <li class="logout-item">                                  
+                          <a href="{% url 'system:logout' %}">خروج</a>
+          <i class="fa fa-sign-out"></i>
+                        </li>
+
+            
+                    </ul>
+                    </div>
                   
 
 				</div>
@@ -94,5 +143,6 @@
 		<script src="{% static 'js/persian-datepicker.js' %}"></script>
 		<script src="{% static 'js/persian-date.js' %}"></script>
 		<script src="{% static 'js/script.js' %}"></script>
+		<script src="{% static 'js/more.js' %}"></script>
 	</body>
 </html>

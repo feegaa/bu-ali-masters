@@ -27,13 +27,16 @@ a {
 }
 
 .row {
+  direction: rtl;
   display: flex;
 }
 .row--align-v-center {
-  align-items: center;
+  align-items: right;
+  direction: rtl;
 }
 .row--align-h-center {
-  justify-content: center;
+  justify-content: right;
+  direction: rtl;
 }
 
 .grid {
@@ -233,12 +236,23 @@ a {
 .sidenav__profile-avatar {
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+img {
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  margin: 0 20px;
+}
+
+/* .sidenav__profile-avatar {
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.2);
   height: 64px;
   width: 64px;
   margin: 0 15px;
-}
+} */
 .sidenav__profile-title {
   font-size: 17px;
   letter-spacing: 1px;
@@ -285,7 +299,8 @@ a {
   padding: 10px 30px;
   color: #fff;
   font-size: 16px;
-  text-transform: capitalize;
+  direction: rtl;
+  text-align: right;
 }
 .navList__subheading-icon {
   display: flex;

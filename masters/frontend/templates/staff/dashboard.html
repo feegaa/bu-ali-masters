@@ -1,7 +1,41 @@
 {% extends './template.html' %}
 
 
-{% block main %}
-    <h1>Dashboard</h1>
-{% endblock main %}
+{% block content %}
+<div class="main">
+
+	<table class="main table table-dark mt-3">
+		<thead>
+			<tr>
+			<th scope="col" style="color: aquamarine;">عنوان</th>
+			<th scope="col" style="color: aquamarine;">مدیر گروه</th>
+			<th scope="col" style="color: aquamarine;">اساتید</th>
+			<th scope="col" style="color: aquamarine;">گرایش ها</th>
+			<th scope="col" style="color: aquamarine;">دانشجویان</th>
+			<th scope="col" style="color: aquamarine;"></th>
+			<th scope="col" style="color: aquamarine;"></th>
+			</tr>
+		</thead>
+		{% for group in groups %}
+			<tr>
+				<th scope="col">{{ group.title }}</th>
+				
+				{% if group.has_admin %}
+					<th scope="col">دکتر {{ group.adminstrator.professor.first_name }} {{ group.adminstrator.professor.last_name }}</th>				
+				{% else %}
+					<th scope="col"><a href="{% url 'staff:set_group_admin' id=group.id %}"><button class="btn btn-warning">تعیین مدیر گروه</button></a></th>
+				{% endif %}
+				<th scope="col"><a href="{% url 'staff:group_professor_list' id=group.id %}"><button class="btn btn-warning">اساتید</button></a></th>
+				<th scope="col"><a href="{% url 'staff:group_professor_list' id=group.id %}"><button class="btn btn-warning">گرایش ها</button></a></th>
+				<th scope="col"><a href="{% url 'staff:group_student_list' id=group.id %}"><button class="btn btn-warning">دانشجویان</button></a></th>
+				<th scope="col"><a href="{% url 'staff:edit_group' id=group.id %}"><button class="btn btn-warning">ویرایش</button></a></th>
+				<th scope="col"><a href="{% url 'staff:delete_group' id=group.id %}"><button class="btn btn-warning">حذف</button></a></th>
+					
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+    
+        
+{% endblock content %}
     

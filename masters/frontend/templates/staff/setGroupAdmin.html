@@ -1,0 +1,19 @@
+{% extends './template.html' %}
+
+
+{% block content %}
+    <div class="main">
+        <form method="POST">
+            {% csrf_token %}
+            <select name="professor" id="id_professor" disabled="disabled">
+                
+                {% for pf in pfs %}
+                    <option value="{{ pf.professor.id }}">دکتر {{ pf.professor.first_name }} {{ pf.professor.last_name }}</option>
+                {% endfor %}
+                    
+            </select>
+            <button type="submit">ثبت</button>
+        </form>
+    </div>
+{% endblock content %}
+    

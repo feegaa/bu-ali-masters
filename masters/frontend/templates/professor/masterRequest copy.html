@@ -1,0 +1,26 @@
+{% extends './template.html' %}
+
+
+{% block content %}
+    <div class="main">
+        <form method="post">
+            <p>ثبت درخواست برای تعیین ظرفیت دانشجویان روزانه و شبانه در مقطع کارشناسی ارشد<br>
+                مجموع تعداد دانشجویان روزانه و شبانه نباید بیش از ۳۰ نفر باشد.<br>
+                لطفا با توجه به تعداد دانشجویان فعال خود ثبت وضعیت کنید
+            </p>
+    
+            {% csrf_token %}
+            <label for="type_1">دانشجویان روزانه</label>
+            <input type="number" id="id_type_1" name="type_1" min="1" max="15">
+            {{ form.type_1.errors}}
+            <br><br>
+            <label for="type_2"></label>دانشجویان شبانه</label>
+            <input type="number" id="id_type_2" name="type_2" min="1" max="15">
+            {{ form.type_2.errors}}
+            <br><br>
+            <!-- {{ form.as_p }} -->
+            <button type="submit">ثبت درخواست</button>
+        </form>
+    </div>
+{% endblock content %}
+    
