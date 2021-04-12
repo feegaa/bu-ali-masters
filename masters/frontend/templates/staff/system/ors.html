@@ -1,0 +1,18 @@
+{% extends './template.html' %}
+
+
+{% block content %}
+<div class="main">
+	<h1>لیست گرایش های گروه {{ request.user.stafffields.college.title }}</h1>
+	
+	{% for item in ors %}
+		{{ item.title }}
+	{% empty %}
+		فعلا گرایشی در این گروه ثبت نشده
+	{% endfor %}
+		
+</div>
+    
+        
+{% endblock content %}
+    

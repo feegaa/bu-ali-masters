@@ -22,127 +22,6 @@ SUBJECT = 'تحصیلات تکمیلی دانشگاه بوعلی سینا'
 
 
 @login_required
-def addStudent(request):
-    if request.user.item_type != User.Types.STAFF:
-        messages.error(request, 'دسترسی ندارید!')
-        return redirect('system:logout')
-
-    if request.method == "POST" :
-        form  = UserForm(request.POST)
-        if form.is_valid():
-            instance           = form.save(commit=False)
-            instance.item_type = User.Types.STUDENT
-            instance.save()
-            sf         = StudentFields()
-            sf.student = instance
-            o_id       = request.POST.get('orientation')
-            is_daily   = request.POST.get('is_daily')
-            try:
-                orientation = Orientation.objects.get(id=o_id)
-            except ObjectDoesNotExist:
-                messages.error(request, 'دانشجو با موفقیت اضافه نشد')        
-                return redirect('staff:dashboard', username=request.user.username)
-            sf.group       = orientation.group
-            sf.is_daily    = True if is_daily else False
-            sf.orientation = orientation
-            sf.save()
-            message = """دانشجو گرامی {first_name} {last_name} حساب کاربری شما در سامانه تحصیلات تکمیلی دانشگاه بوعلی سینا ایجاد شد. \n
-                        برای ورود به آدرس زیر مراجعه کنید.
-                        http://localhost:8000/
-                        نام کاربری: {username} \n
-                        گذرواژه: {password}""".format(first_name=instance.first_name, 
-                                                    last_name=instance.last_name, 
-                                                    username=instance.username, 
-                                                    password=instance.n_code)
-
-            send_mail(SUBJECT, 
-                    message, 
-                    EMAIL_HOST_USER, 
-                    [instance.email], 
-                    fail_silently=False)
-            messages.success(request, 'دانشجو با موفقیت اضافه شد')        
-            return redirect('staff:dashboard', username=request.user.username)
-    else:
-        form  = UserForm()
-
-    orientations = Orientation.objects.all()
-    context = {
-        'form': form,
-        'orientations': orientations,
-    }
-
-    return render(
-            request, 
-            'staff/addStudent.html', 
-            context=context,
-        )
-
-
-
-
-@login_required
-def addProfessor(request):
-    if request.user.item_type != User.Types.STAFF:
-        messages.error(request, 'دسترسی ندارید!')
-        return redirect('system:logout')
-
-    if request.method == "POST" :
-        p_form  = UserForm(request.POST)
-        print(p_form)
-        print("method post")
-        if p_form.is_valid():
-            print("in p form valid")
-            instance           = p_form.save(commit=False)
-            instance.item_type = User.Types.PROFESSOR
-            instance.save()
-            pf           = ProfessorFields()
-            pf.professor = instance
-            group_id     = request.POST.get('group')
-            last_uni     = request.POST.get('last_university')
-            grade        = request.POST.get('grade')
-            try:
-                group = Group.objects.get(id=group_id)
-            except ObjectDoesNotExist:
-                messages.error(request, 'استاد با موفقیت اضافه نشد')        
-                return redirect('staff:dashboard', username=request.user.username)
-            pf.last_university = last_uni
-            pf.group           = group
-            pf.grade           = grade
-            pf.save()
-            message = """استاد گرامی {first_name} {last_name} حساب کاربری شما در سامانه تحصیلات تکمیلی دانشگاه بوعلی سینا ایجاد شد. \n
-                        برای ورود به آدرس زیر مراجعه کنید.
-                        http://localhost:8000/
-                        نام کاربری: {username} \n
-                        گذرواژه: {password}""".format(first_name=instance.first_name, 
-                                                    last_name=instance.last_name, 
-                                                    username=instance.username, 
-                                                    password=instance.n_code)
-            # recepient = str(sub['Email'].value())
-            send_mail(SUBJECT, 
-                    message, 
-                    EMAIL_HOST_USER, 
-                    [instance.email], 
-                    fail_silently = False)
-            messages.success(request, 'استاد با موفقیت اضافه شد')        
-            return redirect('staff:dashboard', username=request.user.username)
-
-    else:
-        p_form  = UserForm()
-
-    groups  = Group.objects.all()
-    context = {
-        'p_form': p_form,
-        'groups': groups,
-    }
-
-    return render(
-            request, 
-            'staff/addProfessor.html', 
-            context=context,
-        )
-
-
-@login_required
 def addGroup(request):
     if request.user.item_type != User.Types.STAFF:
         messages.error(request, 'دسترسی ندارید!')
@@ -165,7 +44,13 @@ def addGroup(request):
     else:
         form = GroupForm()
     
-    return render(request, 'staff/addGroup.html', {'form': form})
+    return render(request, 'staff/system/addGroup.html', {'form': form})
+
+
+@login_required
+def editGroup(request, id):
+
+    return render(request, 'staff/error.html', context=None)
 
 
 @login_required
@@ -208,7 +93,7 @@ def setGroupAdmin(request, id):
         'pfs': pfs
     }
         
-    return render(request, 'staff/setGroupAdmin.html', context=context)        
+    return render(request, 'staff/system/setGroupAdmin.html', context=context)        
     
 
 @login_required
@@ -245,31 +130,14 @@ def addOrientation(request):
         'o_form': o_form,
         'groups': groups
     }
-    return render(request, 'staff/addOrientation.html', context=context)
-
-
-@login_required
-def deleteGroup(request, id):
-    return render(request, 'staff/error.html', context=None)
-
+    return render(request, 'staff/system/addOrientation.html', context=context)
 
 @login_required
-def editGroup(request, id):
-    return render(request, 'staff/error.html', context=None)
-
-
-@login_required
-def professorList(request, id):
-    return render(request, 'staff/error.html', context=None)
-
-@login_required
-def studentList(request, id):
-    return render(request, 'staff/error.html', context=None)
-
-
-# @login_required
-# def error(request):
-#     return render(request, 'staff/error.html', context=None)
+def orientationList(request, id):
+    if request.user.item_type != User.Types.STAFF:
+        return redirect('system:logout')
+    ors = Orientation.objects.filter(group=id)
+    return render(request, 'staff/system/ors.html', {'ors': ors})
 
 
 @login_required
@@ -289,7 +157,7 @@ def groups(request):
         groups = Group.objects.get(college=clg)
     except:
         return redirect('system:logout')
-    return render(request, 'staff/groups.html', context={'groups': groups})
+    return render(request, 'staff/system/groups.html', context={'groups': groups})
 
 @login_required
 def dashboard(request, username):
@@ -304,4 +172,42 @@ def dashboard(request, username):
         groups = Group.objects.filter(college=clg)
     except:
         return redirect('system:logout')
-    return render(request, 'staff/groups.html', context={'groups': groups})
+    return render(request, 'staff/system/groups.html', context={'groups': groups})
+
+
+
+
+# @login_required
+# def dashboard(request):
+
+#     try:
+#         user = UserModel.objects.get(id=request.user.id)
+#     except ObjectDoesNotExist:
+#         return HttpResponse("چنین کاربری نداریم")
+
+#     if request.method == "POST" :
+#         update_user_form   = UserUpdateForm(data=request.POST, instance=user)
+#         update_avatar_form = AvatarUpdateForm(request.POST, request.FILES, instance=user.avatarmodel)
+
+#         if update_user_form.is_valid() and update_avatar_form.is_valid():
+#             update_avatar_form.save()
+#             update_user_form.save()
+
+#             messages.success(request, 'صفحه شما بروزرسانی شد.')        
+#             return redirect('user:dashboard')
+
+#     else:
+#         update_user_form = UserUpdateForm(instance=user)
+#         update_avatar_form = AvatarUpdateForm(instance=user.avatarmodel)
+
+#     context = {
+#         'user_form'  : update_user_form,
+#         'avatar_form': update_avatar_form,   
+#         'user'       : user,
+#     }
+
+#     return render(
+#             request, 
+#             'user/dashboard.html', 
+#             context=context
+#         )
