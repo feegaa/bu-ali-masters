@@ -1,0 +1,11 @@
+<!-- sidebar menu -->
+<ul class="nav side-menu">
+    <li><a><i class="fas fa-chalkboard-teacher fa-lg"></i>&nbsp; اساتید <span class="fa fa-chevron-left"></span></a>
+        <ul class="nav child_menu">
+            <li><a href="{% url 'staff:add_professor' %}">ایجاد حساب</a></li>
+            <li><a href="{% url 'staff:professor_list' %}">لیست اساتید</a></li>
+        </ul>
+    </li>
+    <li><a href="{% url 'student:create_dissertation' %}">ثبت پایاننامه</a></li>
+</ul>
+<!-- /sidebar menu -->

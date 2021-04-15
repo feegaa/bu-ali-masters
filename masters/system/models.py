@@ -11,7 +11,7 @@ class Group(models.Model):
     title     = models.CharField(max_length=100, unique=True)
     has_admin = models.BooleanField(default=False)
     objects   = models.Manager() 
-    
+
     # RELATIONS
     college   = models.ForeignKey(College, on_delete=models.CASCADE)
 
@@ -22,6 +22,7 @@ class Group(models.Model):
 class Adminstrator(models.Model):
     professor = models.ForeignKey(to='professor.Professor', on_delete=models.DO_NOTHING)
     group     = models.OneToOneField(Group, primary_key=True, on_delete=models.CASCADE)
+
 
 class Orientation(models.Model):
     title   = models.CharField(max_length=100, unique=True)
@@ -59,10 +60,15 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['n_code']
 
     def save(self, *args, **kwargs):
-        if not self.password:
-            self.set_password(self.n_code)
-        else:
-            self.set_password(self.password)
+        print(self.password)
+        if not self.is_superuser:
+            if self.password == None:
+                print("password is None")
+                self.set_password(self.n_code)
+            else:
+                print("password is not None")
+                self.set_password(self.password)
+        print(self.password)
             
         return super().save(*args, **kwargs)
 

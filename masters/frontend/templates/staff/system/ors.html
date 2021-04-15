@@ -1,17 +1,51 @@
-{% extends './template.html' %}
+{% extends '../template.html' %}
 
+
+
+
+{% block panel_title %}
+	لیست گروه های موجود در دانشکده {{ request.user.stafffields.college.title }}
+{% endblock panel_title %}
+	
 
 {% block content %}
-<div class="main">
-	<h1>لیست گرایش های گروه {{ request.user.stafffields.college.title }}</h1>
-	
-	{% for item in ors %}
-		{{ item.title }}
-	{% empty %}
-		فعلا گرایشی در این گروه ثبت نشده
-	{% endfor %}
+	<div class="x_content">
 		
-</div>
+		{% if ors %}
+			<table class="table table-light mt-2">
+				<thead>
+					<tr>
+						<th scope="col" style="color: aquamarine;">عنوان</th>
+						<th scope="col" style="color: aquamarine;">دانشجویان</th>
+						<th scope="col" style="color: aquamarine;"></th>
+					</tr>
+				</thead>
+				{% for item in ors %}
+					<tr>
+						<th scope="col"><p>{{ item.title }}</p></th>					
+						<th scope="col"><a href="{% url 'staff:orientation_student_list' id=item.id %}"><button class="btn btn-primary">دانشجویان</button></a></th>
+						<th scope="col">
+							<a href="{% url 'staff:edit_orientation' id=item.id %}" title="ویرایش"><i class="far fa-edit"></i></a>
+							<a href="{% url 'staff:delete_orientation' id=item.id %}" title="حذف"><i class="far fa-trash"></i></a>
+						</th>
+					</tr>
+				{% endfor %}
+			</table>
+		
+		{% else %}
+		<div class="col-md-9 col-sm-9 ">
+			<h4>گرایشی در این گروه ثبت نشده است</h4>
+			<button type="button" class="btn btn-primary">
+				<a href="{% url 'staff:add_orientation' %}" style="color: aliceblue; text-decoration-style: none;">ایجاد گرایش</a>
+			</button>
+		</div>
+		{% endif %}
+			
+	
+	</div>
+
+
+
     
         
 {% endblock content %}

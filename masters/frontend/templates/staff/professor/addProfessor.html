@@ -1,0 +1,115 @@
+{% extends '../template.html' %}
+
+
+
+{% block panel_title %}
+    ایجاد حساب اساتید دانشکده {{ request.user.stafffields.college.title }}
+{% endblock panel_title %}
+    
+
+{% block content %}
+
+            <div class="x_content">
+                <br/>
+                <form method="POST" class="form-horizontal form-label-left input_mask">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" id="id_first_name" name="first_name" placeholder="نام">
+                            {{ form.first_name.errors }}
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control" id="id_last_name" name="last_name" placeholder="نام خانوادگی">
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            {{ form.last_name.errors }}
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control has-feedback-left" id="id_email" name="email" placeholder="ایمیل">
+                            <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                            {{ form.email.errors }}
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control" id="id_phone" name="phone" pattern="+98-[0-9]{3}-[0-9]{7}" placeholder="تلفن">
+                            <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+                            {{ form.phone.errors }}
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control" id="id_n_code" name="n_code" placeholder="کد ملی">
+                            <span class="fa fa-id-card form-control-feedback left" aria-hidden="true"></span>
+                            {{ form.n_code.errors }}
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <input type="text" class="form-control" id="id_username" name="username" placeholder="کد پرسنلی">
+                            <span class="fa fa-id-card form-control-feedback left" aria-hidden="true"></span>
+                            {{ form.username.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-! col-xs-12">آخرین دانشگاه محل تحصیل</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" id="id_last_university" name="last_university" class="form-control" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">گروه آموزشی</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="group" id="id_group">
+                                {% for group in groups %}
+                                    <option value="{{ group.id }}">{{ group.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">رتبه علمی</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="grade" id="id_grade">
+                                <option value="INSTRUCTOR">مربی آموزشیار</option>
+                                <option value="ASSISTANT">استادیار</option>
+                                <option value="ASSOCIATE">دانشیار</option>
+                                <option value="PROFESSOR">استاد تمام</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">جنسیت</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="gender" id="id_gender">
+                                <option value="0">مونث</option>
+                                <option value="1">مذکر</option>
+                                <option value="2">سایر</option>
+                            </select>
+                        </div>
+                        {{ form.gender.errors }}
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                            <!-- <button type="submit" class="btn btn-primary">انصراف</button> -->
+                            <button type="submit" class="btn btn-success">ارسال</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

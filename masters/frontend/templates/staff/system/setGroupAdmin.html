@@ -1,19 +1,45 @@
-{% extends './template.html' %}
+{% extends '../template.html' %}
+
+
+    
+{% block panel_title %}
+ تعیین مدیر گروه {{ group.title }} 
+{% endblock panel_title %}
+    
 
 
 {% block content %}
-    <div class="main">
-        <form method="POST">
-            {% csrf_token %}
-            <select name="professor" id="id_professor" disabled="disabled">
-                
-                {% for pf in pfs %}
-                    <option value="{{ pf.professor.id }}">دکتر {{ pf.professor.first_name }} {{ pf.professor.last_name }}</option>
-                {% endfor %}
-                    
-            </select>
-            <button type="submit">ثبت</button>
-        </form>
+<form method="post" class="form-horizontal form-label-left input_mask">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">تعیین مدیر {{ group.title }}</label>
+        {% if not pfs %}
+            <div class="col-md-9 col-sm-9 ">
+                <button type="button" class="btn btn-primary">
+                    <a href="{% url 'staff:add_professor' %}" style="color: aliceblue; text-decoration-style: none;">ایجاد حساب استاد</a>
+                </button>
+                <p>استادی گروه {{ group.title }} ثبت نشده است.</p>
+            </div>
+        {% else %}
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <select name="professor" id="id_professor">
+                    {% for pf in pfs %}
+                        <option value="{{ pf.professor.id }}">دکتر {{ pf.professor.first_name }} {{ pf.professor.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
+            <br><br><br>
+
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                <button type="submit" class="btn btn-success">ثبت</button>
+            </div>
+        </div>
     </div>
+</form>
+
 {% endblock content %}
     

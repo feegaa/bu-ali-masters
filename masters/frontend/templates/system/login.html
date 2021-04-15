@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'build/css/login.css' %}">
 
     <title>Login</title>
 
@@ -14,7 +14,7 @@
 <body>
 
     <div class="login">
-        <h5>ورود به سامانه تحصیلات تکمیلی دانشگاه بوعلی سینا</h5>
+        <h5 style="color: aliceblue;">سامانه تحصیلات تکمیلی دانشگاه بوعلی سینا</h5>
         <form method="post">
             {% csrf_token %}
             <input type="text" name="username" placeholder="نام کاربری" required="required" />

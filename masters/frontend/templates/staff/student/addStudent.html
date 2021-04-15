@@ -1,0 +1,119 @@
+{% extends '../template.html' %}
+
+
+
+{% block page_title %}
+    ایجاد حساب دانشجویان
+{% endblock page_title %}
+    
+
+{% block content %}
+
+            <div class="x_content">
+                <br/>
+                <form method="POST" class="form-horizontal form-label-left input_mask">
+                    {% csrf_token %}
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="id_first_name" name="first_name" placeholder="نام">
+                        {{ form.first_name.errors }}
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control" id="id_last_name" name="last_name" placeholder="نام خانوادگی">
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                        {{ form.last_name.errors }}
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" id="id_email" name="email" placeholder="ایمیل">
+                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control" id="id_phone" name="phone" pattern="+98-[0-9]{3}-[0-9]{7}" placeholder="تلفن">
+                        <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
+                        {{ form.phone.errors }}
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control" id="id_n_code" name="n_code" placeholder="کد ملی">
+                        <span class="fa fa-id-card form-control-feedback left" aria-hidden="true"></span>
+                        {{ form.n_code.errors }}
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control" id="id_username" name="username" placeholder="شماره دانشجویی">
+                        <span class="fa fa-id-card form-control-feedback left" aria-hidden="true"></span>
+                        {{ form.username.errors }}
+                    </div>
+
+
+                    <label for="message">توضیحات شرایط خاص:( حداکثر ۳۰۰ کاراکتر)</label>
+                    <textarea id="id_description" class="form-control" name="description"
+                              data-parsley-trigger="keyup"
+                              data-parsley-maxlength="300"
+                              data-parsley-validation-threshold="10"></textarea>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">دانشجوی روزانه؟</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="checkbox" name="is_daily" id="id_is_daily">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">گرایش</label>
+                        
+                        {% if not orientations %}
+                            <div class="col-md-9 col-sm-9 ">
+                                <p>ابتدا باید گرایش ایجاد کنید</p>
+                                <button type="button" class="btn btn-primary">
+                                    <a href="{% url 'staff:add_orientation' %}" style="color: aliceblue; text-decoration-style: none;">ایجاد گرایش</a>
+                                </button>
+                            </div>
+                        {% else %}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="group" id="id_group">
+                                    {% for orientation in orientations %}
+                                        <option value="{{ orientation.id }}">{{ orientation.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% endif %}
+                            
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">جنسیت</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="gender" id="id_gender">
+                                <option value="0">مونث</option>
+                                <option value="1">مذکر</option>
+                                <option value="2">سایر</option>
+                            </select>
+                        </div>
+                        {{ form.gender.errors }}
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                            <!-- <button type="submit" class="btn btn-primary">انصراف</button> -->
+                            <button type="submit" class="btn btn-success">ارسال</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

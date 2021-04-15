@@ -47,10 +47,25 @@ def addGroup(request):
     return render(request, 'staff/system/addGroup.html', {'form': form})
 
 
+
 @login_required
 def editGroup(request, id):
 
     return render(request, 'staff/error.html', context=None)
+
+
+
+@login_required
+def editOrientation(request, id):
+
+    return render(request, 'staff/error.html', context=None)
+
+
+@login_required
+def deleteOrientation(request, id):
+
+    return render(request, 'staff/error.html', context=None)
+
 
 
 @login_required
@@ -63,7 +78,7 @@ def setGroupAdmin(request, id):
         pfs   = ProfessorFields.objects.filter(group=group)
     except ObjectDoesNotExist:
         messages.error(request, 'گروه مورد نظر وجود ندارد')
-        return redirect('professor:dashboard', username=request.user.username)
+        return redirect('staff:dashboard', username=request.user.username)
 
     if request.method == "POST":
         p_id = request.POST['professor']
@@ -74,6 +89,10 @@ def setGroupAdmin(request, id):
             messages.error(request, 'استاد مورد نظر در این گروه وجود ندارد')
             return redirect('professor:set_group_admin', id=id)
         Adminstrator(group=group, professor=professor).save()
+        professor.professorfields.is_adminstrator = True
+        group.has_admin                           = True
+        professor.professorfields.save()
+        group.save()
         messages.success(request, 'دکتر {first_name} {last_name} به عنوان مدیر گروه {title} انتخاب شدند.'.format(first_name=professor.first_name,
                                                                                                                 last_name=professor.last_name,
                                                                                                                 title=group.title))
@@ -133,11 +152,20 @@ def addOrientation(request):
     return render(request, 'staff/system/addOrientation.html', context=context)
 
 @login_required
-def orientationList(request, id):
+def groupOrientationList(request, id):
     if request.user.item_type != User.Types.STAFF:
         return redirect('system:logout')
+    try:
+        group = Group.objects.get(id=id)
+    except:
+        messages.error(request, 'گروه پیدا نشد!')
+        return redirect('staff:dashboard', username=request.user.username)
     ors = Orientation.objects.filter(group=id)
-    return render(request, 'staff/system/ors.html', {'ors': ors})
+    context = {
+        'ors': ors,
+        'group': group,
+    }
+    return render(request, 'staff/system/ors.html', context=context)
 
 
 @login_required
@@ -172,7 +200,7 @@ def dashboard(request, username):
         groups = Group.objects.filter(college=clg)
     except:
         return redirect('system:logout')
-    return render(request, 'staff/system/groups.html', context={'groups': groups})
+    return render(request, 'staff/dashboard.html', context={'groups': groups})
 
 
 

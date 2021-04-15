@@ -27,14 +27,12 @@ def addProfessor(request):
     if request.user.item_type != User.Types.STAFF:
         messages.error(request, 'دسترسی ندارید!')
         return redirect('system:logout')
-
+    else:
+        pass
     if request.method == "POST" :
-        p_form  = UserForm(request.POST)
-        print(p_form)
-        print("method post")
-        if p_form.is_valid():
-            print("in p form valid")
-            instance           = p_form.save(commit=False)
+        form  = UserForm(request.POST)
+        if form.is_valid():
+            instance           = form.save(commit=False)
             instance.item_type = User.Types.PROFESSOR
             instance.save()
             pf           = ProfessorFields()
@@ -65,21 +63,21 @@ def addProfessor(request):
                     EMAIL_HOST_USER, 
                     [instance.email], 
                     fail_silently = False)
-            messages.success(request, 'استاد با موفقیت اضافه شد')        
+            messages.success(request, 'استاد با موفقیت اضافه شد. ایمیل برای استاد ارسال شد')        
             return redirect('staff:dashboard', username=request.user.username)
 
     else:
-        p_form  = UserForm()
+        form  = UserForm()
 
     groups  = Group.objects.all()
     context = {
-        'p_form': p_form,
+        'form': form,
         'groups': groups,
     }
 
     return render(
             request, 
-            'staff/addProfessor.html', 
+            'staff/professor/addProfessor.html', 
             context=context,
         )
 

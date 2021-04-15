@@ -12,6 +12,20 @@ class UserForm(forms.ModelForm):
         model  = User
         fields = ['first_name', 'last_name', 'username', 'n_code', 'email', 'phone', 'gender']
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        if first_name.isdigit():
+            raise forms.ValidationError('نوع ورودی نامعتبر')
+        return first_name
+
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+        if last_name.isdigit():
+            raise forms.ValidationError('نوع ورودی نامعتبر')
+        return last_name
+
+
     def clean_username(self):
         username = self.cleaned_data['username']
         print(username)
@@ -29,6 +43,18 @@ class UserForm(forms.ModelForm):
         if not n_code.isdigit():
             raise forms.ValidationError('کدملی عدد است!')
         return n_code
+
+
+
+
+    # def clean_phone(self):
+    #     phone = self.cleaned_data['phone']
+    #     if len(phone) != 10:
+    #         raise forms.ValidationError('کدملی ۱۰ رقم است!')
+    #     if not phone.isdigit():
+    #         raise forms.ValidationError('کدملی عدد است!')
+    #     return phone
+
 
 
 # class PFForm(forms.ModelForm):

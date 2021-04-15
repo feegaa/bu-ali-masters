@@ -73,7 +73,7 @@ def addStudent(request):
 
     return render(
             request, 
-            'staff/addStudent.html', 
+            'staff/student/addStudent.html', 
             context=context,
         )
 
@@ -132,7 +132,7 @@ def studentEdit(request, id):
 
     return render(
             request, 
-            'staff/addStudent.html', 
+            'staff/student/addStudent.html', 
             context=context,
         )
 

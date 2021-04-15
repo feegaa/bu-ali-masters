@@ -13,13 +13,13 @@ from jalali_date.widgets import AdminJalaliDateWidget
 class DissertationForm(forms.ModelForm):
     class Meta:
         model  = Dissertation
-        fields = ['title', 'description', 'jury_date']
+        fields = ['title', 'description', 'docfile']
 
-    def __init__(self, *args, **kwargs):
-        super(DissertationForm, self).__init__(*args, **kwargs)
-        self.fields['jury_date'] = JalaliDateField(# date format is  "yyyy-mm-dd"
-            widget=AdminJalaliDateWidget # optional, to use default datepicker
-        )
+    # def __init__(self, *args, **kwargs):
+    #     super(DissertationForm, self).__init__(*args, **kwargs)
+    #     self.fields['jury_date'] = JalaliDateField(# date format is  "yyyy-mm-dd"
+    #         widget=AdminJalaliDateWidget # optional, to use default datepicker
+    #     )
 
         # you can added a "class" to this field for use your datepicker!
         # self.fields['date'].widget.attrs.update({'class': 'jalali_date-date'})

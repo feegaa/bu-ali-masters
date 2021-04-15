@@ -27,7 +27,8 @@ class StudentFields(models.Model):
     is_graduated = models.BooleanField(default=False)
     is_daily     = models.BooleanField(default=True)
     describtion  = models.CharField(max_length=300, blank=True)
-    
+    has_disserta = models.BooleanField(default=False)
+
     # RELATIONS
     group        = models.ForeignKey(Group, on_delete=models.DO_NOTHING)
     orientation  = models.ForeignKey(Orientation, on_delete=models.DO_NOTHING)
@@ -41,6 +42,7 @@ class Dissertation(models.Model):
     created_at  = jmodels.jDateTimeField(auto_now_add=True)
     jury_date   = jmodels.jDateField()
     objects     = jmodels.jManager() 
+    docfile     = models.FileField(blank=True, upload_to='disserta')
 
     # RELATIONS
     student     = models.OneToOneField(Student, on_delete=models.CASCADE)

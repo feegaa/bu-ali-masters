@@ -1,134 +1,158 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		{% load static %}
-		<link rel="stylesheet" href="{% static 'css/bootstrap.rtl.css' %}">
-		<link rel="stylesheet" href="{% static 'css/main.css' %}?version=67">
-		<link rel="stylesheet" href="{% static 'css/more.css' %}">
-		<link rel="stylesheet" href="{% static 'css/persian-datepicker.css' %}">
-		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-		<title>Document</title>
-	</head>
-	<body>
-		<div class="grid">
+<html lang="fa" dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../build/images/favicon.ico" type="image/ico"/>
+    <title>{% block title %}{% endblock title %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-rtl/dist/css/bootstrap-rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/nprogress/nprogress.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/iCheck/skins/flat/green.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'build/css/custom.min.css' %}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-			<header class="header">
-				<i id="menu_toggle" class="fas fa-bars header__menu"></i>
-			</header>
-
-			<aside class="sidenav">
-				<div class="sidenav__brand">
-					<i class="fas fa-times sidenav__brand-close"></i>
-					<p>سامانه تحصیلات تکمیلی</p>
-				</div>
-				<div class="sidenav__profile">
-          <img class="avatar" width="64" height="64" src="{% static 'imgs/default.png' %}" alt="avatar">
-          <!-- <div class="sidenav__profile-avatar"></div> -->
-					<div class="sidenav__profile-title text-light">کارمند {{ request.user.username }}</div>
-				</div>
-				<div class="row row--align-v-center row--align-h-center">
-          <div class="row row--align-v-center row--align-h-center">
-            <ul class="navList">
-              <li class="navList__heading">درخواست ها<i class="far fa-paper-plane"></i></li>
-              <li>
-                <div class="item-title">
-                  <span class="navList__subheading-title">اخذ دانشجو ارشد</span>
+</head>
+<!-- /header content -->
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col hidden-print">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="{% url 'staff:dashboard' username=request.user.username %}" class="site_title">تحصیلات تکمیلی</span></a>
                 </div>
-            </li>
 
-                  
-                        <li class="navList__heading">ثبت<i class="far fa-plus"></i></li>
-                          <li>
-                            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_group' %}">گروه</a></span>
-                            </div>
-                            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_professor' %}">استاد</a></span>
-                            </div>
-            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_orientation' %}">گرایش</a></span>
-                            </div>
-            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_student' %}">دانشجو</a></span>
-                            </div>
-                        </li>
+                <div class="clearfix"></div>
 
-                          <li> 
-
-                          <div class="navList__subheading">
-                            
-                            <span  class="navList__subheading-title">سلام</span>
-                          </div>
-                          <ul class="subList subList--hidden">
-                            <li class="subList__item">mortgage</li>
-                            <li class="subList__item">investments</li>
-                            <li class="subList__item">spend log</li>
-                            <li class="subList__item">owed</li>
-                          </ul>
-                        </li> 
-
-                        <li class="navList__heading">لیست<i class="far fa-list"></i></li>
-                          <li>
-                            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_group' %}">گروه</a></span>
-                            </div>
-                            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_professor' %}">استاد</a></span>
-                            </div>
-            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_orientation' %}">گرایش</a></span>
-                            </div>
-            <div class="item-title">
-                              <span class="navList__subheading-title"><a href="{% url 'staff:add_student' %}">دانشجو</a></span>
-                            </div>
-                        </li>
-                        
-
-                        <hr>
-            
-
-                        <li class="logout-item">                                  
-                          <a href="{% url 'staff:dashboard' username=request.user.username %}">داشبورد</a>
-          <i class="fa fa-tachometer"></i>
-                        </li>
-
-                        <li class="logout-item">                                  
-                          <a href="{% url 'system:logout' %}">خروج</a>
-          <i class="fa fa-sign-out"></i>
-                        </li>
-
-            
-                    </ul>
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        <img src="{% static 'build/images/default.png' %}" alt="..." class="img-circle profile_img">
                     </div>
-                  
+                    <div class="profile_info">
+                        <span>خوش آمدید,</span>
+                        <h2>{{ request.user.first_name }} {{ request.user.last_name }}</h2>
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
 
-				</div>
-			</aside>
-      {% if messages %}
-      <div id="alert">
-          <div class="alert">
-              {% for message in messages %}
-              <div {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>
-                  {{ message }}
-              </div>
-              {% endfor %}
-          </div>
-      </div>
-      {% endif %} 
+                <br/>
 
-				{% block content %}{% endblock content %}
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>سامانه اداری</h3>
+                        {% include './sidebar.html' %}                    
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
 
-		</div> 
 
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="{% static 'js/persian-datepicker.js' %}"></script>
-		<script src="{% static 'js/persian-date.js' %}"></script>
-		<script src="{% static 'js/script.js' %}"></script>
-		<script src="{% static 'js/more.js' %}"></script>
-	</body>
+                <!-- /menu footer buttons -->
+                    {% include '../public/menuFooterButtons.html' %}
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav hidden-print">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="{% static 'build/images/default.png' %}" alt="">{{ request.user.first_name }} {{ request.user.last_name }}
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> خروج</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- /header content -->
+        
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="page-title">
+            <div class="title_left">
+                <h4>{% block page_title %}{% endblock page_title %}</h4>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>{% block panel_title %}{% endblock panel_title %}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    {% block content %}{% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+
+
+
+    </div>
+</div>
+
+
+<div id="lock_screen">
+    <table>
+        <tr>
+            <td>
+                <div class="clock"></div>
+                <span class="unlock">
+                    <span class="fa-stack fa-5x">
+                      <i class="fa fa-square-o fa-stack-2x fa-inverse"></i>
+                      <i id="icon_lock" class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                    </span>
+                </span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+<script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+<script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+<script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+<script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+<script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'build/js/custom.min.js' %}"></script>
+<script src="{% static 'build/js/more.js' %}"></script>
+
+</body>
 </html>
