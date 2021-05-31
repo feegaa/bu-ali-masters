@@ -67,19 +67,18 @@ def dissertationCreate(request):
         return redirect('system:logout')
     else:
         pass
-    try:
-        Dissertation.objects.get(student=request.user)
-        messages.warning(request, 'شما می توانید پایاننامه خود را ویرایش کنید')
-        return redirect('student:create_dissertation')
-    except ObjectDoesNotExist:
+    if request.user.studentfields.has_disserta:
+        return redirect('student:dashboard')
+    else:
         pass
     if request.method == "POST":
         form = DissertationForm(request.POST, request.FILES)
         print("method")
         if form.is_valid():
             print("form is valid")
-            instance = form.save(commit=False)
-            instance = request.user
+            instance                  = form.save(commit=False)
+            instance.student          = request.user
+            request.user.studentfields.update(has_disserta=True)
             instance.save()
             messages.warning(request, 'شما می توانید پایاننامه خود را ویرایش کنید')
             return redirect('student:dashboard', username=request.user.username)

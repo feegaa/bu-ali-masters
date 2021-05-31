@@ -40,7 +40,7 @@ class Dissertation(models.Model):
     description = models.TextField()
     is_approved = models.BooleanField(default=False)
     created_at  = jmodels.jDateTimeField(auto_now_add=True)
-    jury_date   = jmodels.jDateField()
+    jury_date   = jmodels.jDateField(blank=True)
     objects     = jmodels.jManager() 
     docfile     = models.FileField(blank=True, upload_to='disserta')
 

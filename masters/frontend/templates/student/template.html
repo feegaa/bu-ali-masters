@@ -93,6 +93,18 @@
     <div class="">
 
         <div class="page-title">
+            {% if messages %}
+            <div id="alert">
+                <div class="alert">
+                    {% for message in messages %}
+                    <div {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %} 
+      
             <div class="title_left">
             </div>
 

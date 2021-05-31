@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a561ec33f0814fa7849a2db94761010dd19e9f96801c1e22c17a85aa82f91d06"
+            "sha256": "addc119ba857f46af7ec6de009dba016ca4b69ac4e65b26553681c416fdb5ca7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,19 +18,27 @@
     "default": {
         "asgiref": {
             "hashes": [
-                "sha256:5ee950735509d04eb673bd7f7120f8fa1c9e2df495394992c73234d526907e17",
-                "sha256:7162a3cb30ab0609f1a4c95938fd73e8604f63bdba516a7f7d64b83ff09478f0"
+                "sha256:92906c611ce6c967347bbfea733f13d6313901d54dcca88195eaeb52b2a8e8ee",
+                "sha256:d1216dfbdfb63826470995d31caed36225dcaf34f182e0fa257a4dd9e86f1b78"
             ],
-            "markers": "python_version >= '3.5'",
-            "version": "==3.3.1"
+            "markers": "python_version >= '3.6'",
+            "version": "==3.3.4"
         },
         "django": {
             "hashes": [
-                "sha256:32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7",
-                "sha256:baf099db36ad31f970775d0be5587cc58a6256a6771a44eb795b554d45f211b8"
+                "sha256:0604e84c4fb698a5e53e5857b5aea945b2f19a18f25f10b8748dbdf935788927",
+                "sha256:21f0f9643722675976004eb683c55d33c05486f94506672df3d6a141546f389d"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==3.1.7"
+            "version": "==3.2"
+        },
+        "django-jalali": {
+            "hashes": [
+                "sha256:99fffbc449c58648ca85297d31592a86190e8d7d8c60ed8b28ac3351e764124c",
+                "sha256:e9bec9933f842c9a2ff5c459bea4b087dd808e85a1d1aee597422c8f61dcb771"
+            ],
+            "index": "pypi",
+            "version": "==4.1.2"
         },
         "django-jalali-date": {
             "hashes": [
@@ -58,10 +66,10 @@
         },
         "phonenumbers": {
             "hashes": [
-                "sha256:7c2b26ee026f765a8032fc2a333b46fa1860445c7ce6df3b717b9f6985106084",
-                "sha256:ee5a8508c4a414262abad92ec33f050347f681973ed0fb36e98b52bfe159f6b8"
+                "sha256:271f26271338616460eef8b878e5879401299adfc0cd0891c48b4744afbb45b2",
+                "sha256:7d66d6f09541568941e51fe2275de0f2d519b3234c80c8c166c56d01d098d3fc"
             ],
-            "version": "==8.12.20"
+            "version": "==8.12.21"
         },
         "pytz": {
             "hashes": [

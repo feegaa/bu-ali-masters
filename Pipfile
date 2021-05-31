@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 django-jalali-date = "*"
+django-jalali = "*"
 
 [dev-packages]
 

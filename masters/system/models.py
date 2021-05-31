@@ -62,7 +62,7 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         print(self.password)
         if not self.is_superuser:
-            if self.password == None:
+            if not self.password:
                 print("password is None")
                 self.set_password(self.n_code)
             else:
